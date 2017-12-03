@@ -79,34 +79,7 @@ function checkboxesSelected (checkboxes, errorString) {
 		return "";
 	}
 }
-// next several functions that might be useful for Exercise 4 "as is" or you can modify them to achieve the desired effect
-// 
-function validateUsername (fieldvalue) {
-    if (fieldvalue == "") return "No Username was entered.\n"
-    else if (fieldvalue.length < 5)
-        return "Usernames must be at least 5 characters.\n"
-    else if (/[^a-zA-Z0-9_-]/.test(fieldvalue))
-        return "Only a-z, A-Z, 0-9, - and _ allowed in Usernames.\n"
-    return ""
-}
-// test length of fieldvalue and whether at least one letter is of a certain type
-function validatePassword (fieldvalue) {
-    if (fieldvalue == "") return "No Password was entered.\n"
-    else if (fieldvalue.length < 6)
-        return "Passwords must be at least 6 characters.\n"
-    else if (!/[a-z]/.test(fieldvalue) || ! /[A-Z]/.test(fieldvalue) ||
-             !/[0-9]/.test(fieldvalue))
-        return "Passwords require one each of a-z, A-Z and 0-9.\n"
-    return ""
-}
-//
-function validateAge (fieldvalue) {
-    if (isNaN(fieldvalue)) return "No Age was entered.\n"
-    else if (fieldvalue < 18 || fieldvalue > 110)
-        return "Age must be between 18 and 110.\n"
-    return ""
-}
-//
+
 function validateEmail (fieldvalue) {
     if (fieldvalue == "") return "No Email was entered.\n"
         else if (!((fieldvalue.indexOf(".") > 0) &&
