@@ -125,19 +125,18 @@ function validateState (fieldvalue) {
 
 // validate function that calls other functions and acculumates errorString and test if this is empty or not //
 function validate (form) {
-    fail += fieldEmpty(form.firstname.value, "Please enter a first name.\n")
-    fail += fieldEmpty(form.lasttname.value, "Please enter a last name.\n")  
+    fail = fieldEmpty(form.firstname.value, "Please enter a first name.\n")
+    fail += fieldEmpty(form.lastname.value, "Please enter a last name.\n")  
 	fail += fieldEmpty(form.city.value, "Please enter a city.\n")
-	fail += fieldEmpty(form.state.value)
+	fail += validateState(form.state.value)
 	fail += validateEmail(form.email.value)
 	fail += fieldEmpty(form.phone.value "Please enter a phone number.\n")
 	fail += radioButtonSelected(form.attendance, "Please let us know if you will be attending.\n")
-	fail += checkboxesSelected(form.activities, "Please select at least one activity.\n")
+	fail += checkboxesSelected(form.activities, "Please select at least one activity from the checkboxes.\n")
     if (fail == "") return true
     else { alert(fail); return false }
 }
-	</script>
-	
+	</script>	
 </head>
 
 <body>
@@ -162,7 +161,7 @@ function validate (form) {
 		<article id="intro" class="floatleft">
 			<h2>Want to learn more about the Family Reunion?</h2>
 				<p>Please fill out the following form to be included in the family reunion and receive further updates.</p>
-			<form method="POST" >
+			<form method="POST" action="mailto:isabelle.encela@rutgers.edu" onsubmit="return validate(this)">
 				<fieldset id="personalinformation">
 					<legend>Personal Information</legend>
 					<label for="firstname">First name</label>
