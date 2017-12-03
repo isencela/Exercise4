@@ -103,7 +103,7 @@ function validate (form) {
 	fail += fieldEmpty(form.city.value, "Please enter a city.\n")
 	fail += validateState(form.state.value)
 	fail += validateEmail(form.email.value)
-	fail += fieldEmpty(form.phone.value "Please enter a phone number.\n")
+	fail += fieldEmpty(form.phonenumber.value, "Please enter a phone number.\n")
 	fail += radioButtonSelected(form.attendance, "Please let us know if you will be attending.\n")
 	fail += checkboxesSelected(form.activities, "Please select at least one activity from the checkboxes.\n")
     if (fail == "") return true
