@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<title>2018 Family Reunion</title>
+		<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="styles.css">
+	<style>
+		fieldset, legend, label, select, input {
+			margin-bottom: .5em;
+		}
+		
+		fieldset {
+			border: thin blue solid;
+		}
+		
+		legend {
+			font-weight: bold;
+		}
+		
+		label {
+			display: inline-block;
+			width: 150px;
+		}
+	</style>
+
+	<script>
+	function fieldEmpty(fieldvalue, errorString) {
+    if (fieldvalue == "") {
+		return (errorString);
+	} else {
+    	return "";    // return empty string
+	}
+}
+// test if radio button is selected //
+function radioButtonSelected (radioButtons, errorString) {
+	radioSelected = -1;
+	// for loop: first need an index i to iterate through array of radio buttons;
+	// next we need to decide if to start at beginning or end of array
+	// i=radioButtons.length-1 means we start at end
+	// test if all elements of array ... know if i > -1 that we have still elements to examine
+	// i-- means that we subtract -1 from i
+	for (i=radioButtons.length-1; i > -1; i--) {
+		if (radioButtons[i].checked) {
+			radioSelected = i; 
+			i = -1;   // set index to -1 so that for loop stops
+		}
+	}
+	// test if we found a selected radio button ... if radioSelected equal to -1, then we have not and return errorString
+	if (radioSelected == -1) {
+		return (errorString);
+	} else {
+		return "";
+	}
+}
+// test how many checkboxes selected //
+function checkboxesSelected (checkboxes, errorString) {
+	// keep a count of how many checkboxes have been selected ... initially zero
+	// have to use var checkboxesSelected = 0; 
+	// because: 1) function is also called "checkboxesSelected" and without explicit var declaration, a name conflict is created.
+	// 2) Good practice to have var when declaring a variable ...not doing it in our JavaScript examples to not add more complexity.
+	var checkboxesSelected = 0;
+	// for loop: first need an index i to iterate through array of checkboxes;
+	// start at beginning of array of checkboxes
+	// i=0 means we start at beginning of array
+	// test if all elements of array have been tested... know if i < checkboxes.length that we have still elements to examine
+	// i-- means that we subtract -1 from i
+	for (i=0; i<checkboxes.length; i++) {
+		// test if current checkbox is checked ... if yes, add 1 to counter
+		if (checkboxes[i].checked) {
+			// increment counter
+			checkboxesSelected += 1; 
+		}
+	}
+	// test how many checkboxes have been selected ... 
+	// if checkboxesSelected equal to 0, then we have not and return errorString
+	if (checkboxesSelected == 0) {
+		return (errorString);
+	} else {
+		return "";
+	}
+}
+// next several functions that might be useful for Exercise 4 "as is" or you can modify them to achieve the desired effect
+// 
+function validateUsername (fieldvalue) {
+    if (fieldvalue == "") return "No Username was entered.\n"
+    else if (fieldvalue.length < 5)
+        return "Usernames must be at least 5 characters.\n"
+    else if (/[^a-zA-Z0-9_-]/.test(fieldvalue))
+        return "Only a-z, A-Z, 0-9, - and _ allowed in Usernames.\n"
+    return ""
+}
+// test length of fieldvalue and whether at least one letter is of a certain type
+function validatePassword (fieldvalue) {
+    if (fieldvalue == "") return "No Password was entered.\n"
+    else if (fieldvalue.length < 6)
+        return "Passwords must be at least 6 characters.\n"
+    else if (!/[a-z]/.test(fieldvalue) || ! /[A-Z]/.test(fieldvalue) ||
+             !/[0-9]/.test(fieldvalue))
+        return "Passwords require one each of a-z, A-Z and 0-9.\n"
+    return ""
+}
+//
+function validateAge (fieldvalue) {
+    if (isNaN(fieldvalue)) return "No Age was entered.\n"
+    else if (fieldvalue < 18 || fieldvalue > 110)
+        return "Age must be between 18 and 110.\n"
+    return ""
+}
+//
+function validateEmail (fieldvalue) {
+    if (fieldvalue == "") return "No Email was entered.\n"
+        else if (!((fieldvalue.indexOf(".") > 0) &&
+                   (fieldvalue.indexOf("@") > 0)) ||
+                  /[^a-zA-Z0-9.@_-]/.test(fieldvalue))
+        return "The Email address is invalid.\n"
+    return ""
+}
+
+function validateState (fieldvalue) {
+    if (fieldvalue == "") return "Please enter a valid two-letter state abbreviation.\n"
+        else if (fieldvalue.legth !="2")
+        return "Please enter a valid two-letter state abbreviation.\n"
+    return ""
+}
+
+// validate function that calls other functions and acculumates errorString and test if this is empty or not //
+function validate (form) {
+    fail += fieldEmpty(form.firstname.value, "Please enter a first name.\n")
+    fail += fieldEmpty(form.lasttname.value, "Please enter a last name.\n")  
+	fail += fieldEmpty(form.city.value, "Please enter a city.\n")
+	fail += fieldEmpty(form.state.value)
+	fail += validateEmail(form.email.value)
+	fail += fieldEmpty(form.phone.value "Please enter a phone number.\n")
+	fail += radioButtonSelected(form.attendance, "Please let us know if you will be attending.\n")
+	fail += checkboxesSelected(form.activities, "Please select at least one activity.\n")
+    if (fail == "") return true
+    else { alert(fail); return false }
+}
+	</script>
+	
+</head>
+
+<body>
+	<div id="everything">
+	
+	
+	<header>
+		<div class="hero">
+			<h1>2018 FAMILY REUNION</h1>
+    		<nav>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li id="youarehere"><a href="contact.html">Contact</a></li>
+				</ul>
+			</nav>
+    	</div>
+	
+	</header>
+	
+	<main>
+		<img src='kittyhawk.jpg' alt='kittyhawk' class="floatleft" onmouseover="this.src = kittyhawk2.src" onmouseout="this.src = kittyhawk.src"/>
+		<article id="intro" class="floatleft">
+			<h2>Want to learn more about the Family Reunion?</h2>
+				<p>Please fill out the following form to be included in the family reunion and receive further updates.</p>
+			<form method="POST" >
+				<fieldset id="personalinformation">
+					<legend>Personal Information</legend>
+					<label for="firstname">First name</label>
+					<input type="text" id="firstname"><br>
+					<label for="lastname">Last name</label>
+					<input type="text" id="lastname"><br>
+					<label for="city">City</label>
+					<input type="text" id="city"><br>
+					<label for="state">State</label>
+					<input type="text" id="state" size="2">
+				</fieldset>
+				<fieldset id="contactinformation">
+					<legend>Contact Information</legend>
+					<label for="email">Email</label>
+					<input type="text" id="email" size="40"><br>
+					<label for="phonenumber">Phone Number</label>
+					<input type="text" id="phonenumber" size="10">
+				</fieldset>
+				<fieldset id="Interests">
+					<legend>Reunion Input</legend>
+					<label>Are you joining us?</label><br>
+					<input type="radio" name="attendance" value="yes">Yes, I'll be there.<br>
+					<input type="radio" name="attendance" value="no">No, I won't be there.<br>
+					<label>Select all activities you are interested in:</label><br>
+					<input type="checkbox" name="activities" value="swimming">Swimming<br>
+					<input type="checkbox" name="activities" value="bbq">Cook off<br>
+					<input type="checkbox" name="activities" value="lighthouse">Visit a lighthouse<br>
+					<input type="checkbox" name="activities" value="history">Historic sites<br>
+					<input type="checkbox" name="activities" value="olympics">Reunion Olympics<br>
+					<input type="checkbox" name="activities" value="karaoke">Karaoke Night<br>
+					<input type="checkbox" name="activities" value="games">Game Night<br>
+					<input type="checkbox" name="activities" value="talentshow">Talent Show<br>
+					<label for="shirtsize">Shirt Size</label>
+					<select id="shirtsize">
+						<option value="S">S</option>
+						<option value="M">M</option>
+						<option value="L">L</option>
+					</select>
+				</fieldset>
+				<fieldset id="other">
+					<label for="opinion">Additional Suggestions and Opinions</label>
+					<textarea id="opinion"></textarea><br>
+				</fieldset>
+				<input type="submit" value="Submit application">
+				<input type="reset" value="Clear form">
+			</form>	
+			
+		</article>
+	</main>
+
+	<footer>
+		<br>
+		<p>Copyright <script>new Date().getFullYear()>2010&&document.write(new Date().getFullYear());</script>
+, Isabelle Encela</p>
+	</footer>
+	</div>
+</body>
+</html>
+
+
